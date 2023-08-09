@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = ({ index, form, setForm }) => {
+const Form = ({ index, form, setForm, deleteForm }) => {
 
     const [validate, setValidate] = React.useState(false)
 
@@ -52,6 +52,7 @@ const Form = ({ index, form, setForm }) => {
                 </label>
 
                 <button onClick={validateForm} style={{ maxWidth: "70px", margin: "4px" }} > validate </button>
+                <button onClick={() => { deleteForm(index) }} style={{ maxWidth: "70px", margin: "4px" }} > delete </button>
             </div>
         </div>
     )

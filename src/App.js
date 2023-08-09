@@ -11,6 +11,12 @@ function App() {
     setForm([...form, { degree: '', university: '', location: '', year: "" }])
   }
 
+  const deleteForm = (index) => {
+    let newArr = [...form]
+    newArr.splice(index, 1)
+    setForm(newArr)
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("form", form)
@@ -36,16 +42,14 @@ function App() {
   return (
     <div>
       <h1>React Form</h1>
-
       <form >
         <PersonalInformation form={form} setForm={setForm} />
         {
           form.map((item, index) => {
             if (index == 0) return null
-            return <Form key={index} index={index} form={form} setForm={setForm} />
+            return <Form key={index} index={index} form={form} setForm={setForm} deleteForm={deleteForm} />
           })
         }
-
         <button onClick={addForm} style={{ margin: "4px" }} >Add Form</button>
         <button onClick={handleSubmit} style={{ margin: "4px" }} >Submit</button>
       </form>
