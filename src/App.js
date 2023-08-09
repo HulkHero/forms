@@ -14,18 +14,24 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("form", form)
+    let error = false;
     form.forEach((item, index) => {
       if (index == 0) {
         if (item.firstName.length < 3 || item.lastName.length < 3 || item.email.length < 3 || item.age <= 0) {
+          error = true;
           alert("Person Information Form is invalid")
         }
       }
       else {
         if (item.degree.length < 3 || item.university.length < 3 || item.location.length < 3 || item.year <= 0) {
+          error = true;
           alert("Education Form " + (index) + " is invalid")
         }
       }
     })
+    if (error == false) {
+      alert("Form is valid......Submitted")
+    }
   }
   return (
     <div>
