@@ -10,52 +10,46 @@ const Form = ({ index, form, setForm }) => {
         let newArr = [...form]
         newArr[index][name] = value
         setForm(newArr)
-
     }
 
-    const validateForm = () => {
-
-
+    const validateForm = (e) => {
+        e.preventDefault()
         setValidate(true)
 
     }
     return (
         <div style={{ margin: "10px", padding: "10px", backgroundColor: "whitesmoke" }}>
-            <div >Form: {index + 1}</div>
+            <div >Eduction Form: {index}</div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <label htmlFor='firstName' >
-                    FirstName:
-                    <input type="text" value={form[index]?.firstName} onChange={handleChange} name="firstName" />
+                <label htmlFor='degree' >
+                    Degree:
+                    <input type="text" value={form[index].degree} onChange={handleChange} name="degree" />
                     {
-                        validate == true && form[index]?.firstName?.length < 3 ? <span style={{ color: "red" }} >FirstName must be 3 characters</span> : null
+                        validate == true && form[index].degree?.trim().length < 3 ? <span style={{ color: "red" }} >degree must be atleast 3 characters</span> : null
                     }
 
                 </label>
-
-
-                <label name="firstName" htmlFor='lastName' >
-                    LastName:
-                    <input type="text" value={form[index]?.lastName} onChange={handleChange} name="lastName" />
+                <label name="degree" htmlFor='university' >
+                    university:
+                    <input type="text" value={form[index]?.university} onChange={handleChange} name="university" />
                     {
-                        validate == true && form[index].lastName?.length < 3 ? <span style={{ color: "red" }} >LastName must be 3 characters</span> : null
+                        validate == true && form[index].university?.trim().length < 3 ? <span style={{ color: "red" }} >university must be atleast 3 characters</span> : null
                     }
                 </label>
-                <label name="firstName" htmlFor='email' >
-                    Email:
-                    <input type="text" value={form[index]?.email} onChange={handleChange} name="email" />
+                <label name="degree" htmlFor='location' >
+                    location:
+                    <input type="text" value={form[index]?.location} onChange={handleChange} name="location" />
                     {
-                        validate == true && form[index].email?.length < 3 ? <span style={{ color: "red" }} >Email must include "@"</span> : null
+                        validate == true && form[index].location?.trim().length < 3 ? <span style={{ color: "red" }} >location must be atleast 3 characters</span> : null
                     }
                 </label>
-                {
-                    index == 1 ? <label htmlFor='age' >
-                        Age:
-                        <input type="number" value={form[index]?.age} onChange={handleChange} name="age" />
-                        {
-                            validate == true && form[index].age < 0 ? <span style={{ color: "red" }} >Age must positive</span> : null
-                        }
-                    </label> : null
-                }
+                <label htmlFor='year' >
+                    year:
+                    <input type="number" value={form[index]?.year} onChange={handleChange} name="year" />
+                    {
+                        validate == true && form[index].year <= 0 ? <span style={{ color: "red" }} >Year must positive</span> : null
+                    }
+                </label>
 
                 <button onClick={validateForm} style={{ maxWidth: "70px", margin: "4px" }} > validate </button>
             </div>
