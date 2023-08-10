@@ -1,8 +1,6 @@
 import React from 'react'
 
-const Modal = ({ errorMesseges, setErrorMesseges, openModal, setopenModal }) => {
-    console.log("errorMesseges", errorMesseges)
-
+const Modal = ({ errorMesseges, setopenModal }) => {
     return (
         <div
             className={`fixed inset-0 flex items-center justify-center z-50 `}

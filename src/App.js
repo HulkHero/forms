@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
-import Form from './components/Form';
-import PersonalInfoForm from './components/PersonalInfoForm';
+import Form from './components/Forms/Form';
+import PersonalInfoForm from './components/Forms/PersonalInfoForm';
 import Modal from './components/Modal';
 
 function App() {
@@ -9,28 +9,26 @@ function App() {
   const [form, setForm] = useState([{ id: 0, firstName: '', lastName: '', email: '', age: "" }])
   const [openModal, setopenModal] = useState(false)
   const [errorMesseges, setErrorMesseges] = useState([])
+
   const addForm = (e) => {
     e.preventDefault()
     const length = form.length
     const item = form[length - 1]
     let id = item.id + 1
-    console.log("id", id)
     setForm([...form, { id: id, degree: '', university: '', location: '', year: "" }])
   }
 
   const deleteForm = (id) => {
-
     let arr = form.filter((item) => item.id != id)
     setForm(arr)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log("form", form)
     let arr = []
     form.forEach((item, index) => {
       if (index == 0) {
-        if (item.firstName.length < 3 || item.lastName.length < 3 || item.email.length < 3 || item.age <= 0) {
+        if (item.firstName.length < 3 || item.lastName.length < 3 || item.email.length < 3 || (!form[0].email?.includes("@")) || item.age <= 0) {
           arr.push("Person Information Form is invalid")
         }
       }
@@ -41,15 +39,14 @@ function App() {
       }
     })
     setErrorMesseges(arr)
-    console.log("errorMesseges", errorMesseges)
     setopenModal(true)
-
   }
+
   return (
     <main className='bg-slate-200 min-w-full min-h-screen'>
       <div className='container mx-auto max-w-3xl' >
         <h1 className='font-semibold text-4xl py-5 text-center' >React Form</h1>
-        {openModal && <Modal errorMesseges={errorMesseges} openModal={openModal} setopenModal={setopenModal} />}
+        {openModal && <Modal errorMesseges={errorMesseges} setopenModal={setopenModal} />}
         <form >
           <PersonalInfoForm form={form} setForm={setForm} />
           <section className='flex flex-col gap-5 mt-5' >
