@@ -2,10 +2,13 @@
 import { useState } from 'react';
 import Form from './components/Form';
 import PersonalInfoForm from './components/PersonalInfoForm';
+import Modal from './components/Modal';
 
 function App() {
 
   const [form, setForm] = useState([{ id: 0, firstName: '', lastName: '', email: '', age: "" }])
+  const [openModal, setopenModal] = useState(false)
+  const [errorMesseges, setErrorMesseges] = useState([])
   const addForm = (e) => {
     e.preventDefault()
     const length = form.length
@@ -24,29 +27,29 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("form", form)
-    let error = false;
+    let arr = []
     form.forEach((item, index) => {
       if (index == 0) {
         if (item.firstName.length < 3 || item.lastName.length < 3 || item.email.length < 3 || item.age <= 0) {
-          error = true;
-          alert("Person Information Form is invalid")
+          arr.push("Person Information Form is invalid")
         }
       }
       else {
         if (item.degree.length < 3 || item.university.length < 3 || item.location.length < 3 || item.year <= 0) {
-          error = true;
-          alert("Education Form " + (item.id) + " is invalid")
+          arr.push("Education Form " + (item.id) + " is invalid")
         }
       }
     })
-    if (error == false) {
-      alert("Form is valid......Submitted")
-    }
+    setErrorMesseges(arr)
+    console.log("errorMesseges", errorMesseges)
+    setopenModal(true)
+
   }
   return (
     <main className='bg-slate-200 min-w-full min-h-screen'>
       <div className='container mx-auto max-w-3xl' >
         <h1 className='font-semibold text-4xl py-5 text-center' >React Form</h1>
+        {openModal && <Modal errorMesseges={errorMesseges} openModal={openModal} setopenModal={setopenModal} />}
         <form >
           <PersonalInfoForm form={form} setForm={setForm} />
           <section className='flex flex-col gap-5 mt-5' >

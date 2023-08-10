@@ -5,10 +5,9 @@ const PersonalInfoForm = ({ form, setForm }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    console.log(0, name, value)
-    let newArr = [...form]
-    newArr[0][name] = value
-    setForm(newArr)
+    setForm((prev) => {
+      return [{ ...prev[0], [name]: value }, ...prev.slice(1)]
+    })
   }
 
   const validateForm = (e) => {

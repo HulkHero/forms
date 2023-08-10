@@ -6,7 +6,6 @@ const Form = ({ index, form, setForm, deleteForm }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        console.log(index, name, value)
         let newArr = [...form]
         newArr[index][name] = value
         setForm(newArr)
@@ -59,7 +58,7 @@ const Form = ({ index, form, setForm, deleteForm }) => {
 
                 </div>
                 <button onClick={validateForm} className='bg-blue-600 my-4 py-2 px-4 text-white hover:bg-blue-700 rounded-md' > validate </button>
-                <button onClick={(e) => { e.preventDefault(); deleteForm(form[index].id) }} className='bg-red-600 my-4 pb-2 px-4 text-white hover:bg-red-700 rounded-md'> delete </button>
+                <button onClick={(e) => { e.preventDefault(); deleteForm(form[index].id) }} className='bg-red-600 mb-4 py-2 px-4 text-white hover:bg-red-700 rounded-md'> delete </button>
             </div>
         </div>
     )
